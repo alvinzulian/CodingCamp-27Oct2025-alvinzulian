@@ -1,0 +1,362 @@
+/* Variabel Warna untuk konsistensi (Skema MEWAH: Deep Teal & Dark Navy) */
+:root {
+    --bg-color: #0F111A; /* Background luar yang sangat gelap (Navy Black) */
+    --card-color: #1A202C; /* Background container utama (Dark Slate) */
+    --text-color: #EAEAEA; /* Teks putih lembut */
+    --primary-color: #00CCB3; /* Deep Emerald Teal (Aksen Mewah) */
+    --secondary-color: #00A693; /* Warna Teal sedikit lebih gelap untuk gradient */
+    --dark-control-color: #2C3440; /* Warna untuk input dan tombol FILTER */
+    --table-header-color: #384252; /* Warna untuk header tabel */
+    --gold-glow: #C9A00D; /* Aksen Gold/Bronze untuk shadow */
+    --overdue-color: #FF7043; /* Oranye Terang */
+    --overdue-bg-color: rgba(255, 112, 67, 0.15); /* Background Oranye Transparan */
+}
+
+/* --- Gaya Dasar & Layout --- */
+body {
+    font-family: 'Inter', Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding-bottom: 50px; /* Ruang untuk footer */
+}
+
+.todo-app-card {
+    background-color: var(--card-color);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.9), 0 0 25px rgba(0, 204, 179, 0.4);
+    width: 650px;
+    transition: transform 0.3s;
+    margin-top: 40px;
+}
+.todo-app-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 204, 179, 0.6);
+}
+
+h1 {
+    text-align: center;
+    color: var(--text-color);
+    margin-bottom: 25px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-shadow: 0 0 5px var(--gold-glow), 0 0 10px rgba(0, 204, 179, 0.5);
+}
+
+/* --- Input dan Tombol Tambah --- */
+.input-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#task-input, #due-date-input, #edit-task-input, #edit-due-date-input {
+    padding: 14px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background-color: var(--dark-control-color);
+    color: var(--text-color);
+    flex-grow: 1;
+    transition: all 0.3s;
+}
+
+#due-date-input {
+    flex-grow: 0.5;
+    min-width: 150px;
+}
+
+#task-input:focus, #due-date-input:focus, #edit-task-input:focus, #edit-due-date-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(0, 204, 179, 0.8);
+    background-color: #202730; 
+}
+
+.add-btn {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: var(--bg-color);
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.2em;
+    transition: all 0.3s;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6); 
+}
+.add-btn:hover {
+    background: linear-gradient(45deg, #00E5CC, var(--primary-color));
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
+    transform: translateY(-2px);
+}
+
+/* --- Kontrol Utama (Filter & Delete All) --- */
+.controls-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.control-btn {
+    color: var(--text-color);
+    border: 1px solid var(--dark-control-color);
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.filter-btn {
+    background-color: var(--dark-control-color);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+.filter-btn:hover {
+    background-color: var(--table-header-color);
+    border-color: var(--primary-color);
+    transform: translateY(-1px);
+}
+
+.delete-all-btn {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: var(--bg-color);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+}
+.delete-all-btn:hover {
+    background: linear-gradient(45deg, #00E5CC, var(--primary-color));
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.8);
+    transform: translateY(-2px);
+}
+
+
+/* --- Tabel Tugas dan Baris --- */
+.task-table-container {
+    background-color: var(--dark-control-color);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+thead {
+    background-color: var(--table-header-color);
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+}
+
+tbody tr {
+    transition: background-color 0.2s, box-shadow 0.2s;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+tbody tr:hover {
+    background-color: #31314a; 
+    box-shadow: 0 0 10px rgba(0, 204, 179, 0.1); 
+}
+
+/* Gaya Status Tugas */
+.completed-task {
+    text-decoration: line-through; 
+    opacity: 0.5; 
+    font-style: italic; 
+}
+
+/* Overdue Tasks */
+.overdue-task-row {
+    background-color: var(--overdue-bg-color); 
+    border-left: 5px solid var(--overdue-color); 
+}
+
+.overdue-task-row:hover {
+    background-color: rgba(255, 112, 67, 0.25) !important; 
+}
+
+.overdue-task-text {
+    color: var(--overdue-color) !important; 
+    font-weight: 600;
+    text-shadow: 0 0 5px rgba(255, 112, 67, 0.5); 
+}
+
+
+/* --- Tombol Aksi Tabel --- */
+td:last-child {
+    text-align: right;
+    width: 250px; 
+    white-space: nowrap;
+}
+
+.action-btn {
+    background: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    cursor: pointer;
+    font-size: 0.85em;
+    margin-left: 5px;
+    padding: 6px 10px;
+    border-radius: 5px;
+    transition: all 0.2s;
+    font-weight: 600;
+}
+
+.action-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    background-color: transparent;
+    transform: none;
+}
+
+.edit-btn {
+    border-color: #C9A00D; 
+    color: #C9A00D;
+}
+
+.delete-btn {
+    border-color: #ff5a5a;
+    color: #ff5a5a;
+}
+
+.action-btn:hover {
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    transform: scale(1.05);
+}
+
+.edit-btn:hover {
+    background-color: #C9A00D;
+    color: var(--card-color);
+}
+
+.delete-btn:hover {
+    background-color: #ff5a5a;
+    color: var(--text-color);
+}
+
+/* --- Sorting Indicators --- */
+.sortable {
+    cursor: pointer;
+    position: relative;
+    padding-right: 25px !important;
+}
+
+.sortable::after {
+    content: '↓';
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.8em;
+    opacity: 0.3;
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.sortable.active-sort::after {
+    opacity: 1;
+}
+
+.sortable.asc::after {
+    content: '↑'; 
+}
+
+/* --- Modal & Dialogs --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    visibility: hidden; 
+    opacity: 0;
+    transition: visibility 0.3s, opacity 0.3s;
+}
+
+.modal-overlay.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal-content {
+    background-color: var(--card-color);
+    color: var(--text-color);
+    padding: 35px;
+    border-radius: 12px;
+    width: 400px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.9);
+    border: 1px solid var(--table-header-color);
+    transform: scale(0.9);
+    transition: transform 0.3s;
+}
+
+.modal-overlay.visible .modal-content {
+    transform: scale(1);
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* --- Toast Notification --- */
+.toast-notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    padding: 14px 25px;
+    border-radius: 10px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.5s, transform 0.5s;
+    font-weight: 700;
+}
+
+.toast-notification.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-10px);
+}
+
+/* --- Gaya Footer Aplikasi --- */
+.app-footer {
+    position: fixed; 
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    background-color: var(--bg-color); 
+    color: #666; 
+    font-size: 0.8em;
+    border-top: 1px solid rgba(0, 204, 179, 0.2); 
+    z-index: 10;
+}
+
+.app-footer p {
+    margin: 0;
+}
