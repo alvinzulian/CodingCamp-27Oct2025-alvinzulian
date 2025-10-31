@@ -59,17 +59,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 3000);
     }
 
-    // --- UTILITIES: Penyimpanan Data ---
+    // --- UTILITIES: Penyimpanan Data 💾 ---
+    /**
+     * Menyimpan array tugas saat ini ke localStorage.
+     */
     function saveTasks() {
         localStorage.setItem('todoTasks', JSON.stringify(tasks));
     }
 
+    /**
+     * Mengambil tugas yang tersimpan dari localStorage saat aplikasi dimuat.
+     */
     function loadTasks() {
         const savedTasks = localStorage.getItem('todoTasks');
         if (savedTasks) {
             tasks = JSON.parse(savedTasks);
         }
     }
+    // Panggil loadTasks() segera setelah deklarasi untuk memuat data awal
     loadTasks();
 
 
@@ -78,6 +85,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const { key, direction } = sortState;
 
         tasksArray.sort((a, b) => {
+            // Logika untuk selalu menempatkan tugas yang sudah selesai di bawah
+            if (a.completed !== b.completed) {
+                return a.completed ? 1 : -1; // completed=true (1) diletakkan di bawah completed=false (-1)
+            }
+
             let valA = a[key];
             let valB = b[key];
             
@@ -85,10 +97,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 valA = valA.toLowerCase();
                 valB = valB.toLowerCase();
             }
-            if (key === 'completed') {
-                valA = a.completed ? 1 : 0;
-                valB = b.completed ? 1 : 0;
-            }
+            // Pengurutan 'completed' di sini tidak lagi diperlukan karena sudah ditangani di atas
+            // if (key === 'completed') {
+            //     valA = a.completed ? 1 : 0;
+            //     valB = b.completed ? 1 : 0;
+            // }
 
             if (valA < valB) return direction === 'asc' ? -1 : 1;
             if (valA > valB) return direction === 'asc' ? 1 : -1;
@@ -161,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
             taskList.appendChild(row);
         });
         
-        saveTasks();
+        saveTasks(); // Panggil saveTasks() setelah render
         updateSortHeaderUI();
     }
 

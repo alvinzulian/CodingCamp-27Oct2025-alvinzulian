@@ -1,73 +1,78 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Website Daftar Tugas Premium</title>
-  <link rel="stylesheet" href="css/style.css"> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Daftar Tugas Alvin</title>
+    <link rel="icon" type="image/png" href="https://static.wixstatic.com/media/a0b164_7672abbe760b42ea86445cbf7d63beec~mv2.png/v1/fill/w_617,h_588,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/a0b164_7672abbe760b42ea86445cbf7d63beec~mv2.png">
+    <link rel="stylesheet" href="css/style.css"> 
 </head>
 <body>
-  
-  <main class="todo-app-container">
-    <section class="todo-app-card">
-      <h1>Website Daftar Tugas</h1>
-      
-      <section class="input-row">
-        <input type="text" id="task-input" placeholder="Tambahkan tugas baru...">
-        <input type="date" id="due-date-input"> 
-        <button id="add-btn" class="add-btn" aria-label="Tambah Tugas">+</button>
-      </section>
-      
-      <section class="controls-row">
-        <button id="filter-btn" class="control-btn filter-btn">Saring Tugas</button>
-        <button id="delete-all-btn" class="control-btn delete-all-btn">Hapus Semua</button>
-      </section>
+    
+    <main class="todo-app-container">
+        <section class="todo-app-card">
+            
+            <h1>
+                <img src="https://static.wixstatic.com/media/a0b164_7672abbe760b42ea86445cbf7d63beec~mv2.png/v1/fill/w_617,h_588,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/a0b164_7672abbe760b42ea86445cbf7d63beec~mv2.png" alt="Logo Daftar Tugas" class="website-logo-stacked">
+                <span>Website Daftar Tugas</span>
+            </h1>
+            
+            <section class="input-row">
+                <input type="text" id="task-input" placeholder="Tambahkan tugas baru...">
+                <input type="date" id="due-date-input"> 
+                <button id="add-btn" class="add-btn" aria-label="Tambah Tugas">+</button>
+            </section>
+            
+            <section class="controls-row">
+                <button id="filter-btn" class="control-btn filter-btn">Saring Tugas</button>
+                <button id="delete-all-btn" class="control-btn delete-all-btn">Hapus Semua</button>
+            </section>
 
-      <section class="task-table-container">
-        <table>
-          <thead>
-            <tr>
-              <th id="sort-task" data-sort-key="name" class="sortable">TUGAS</th>
-              <th id="sort-date" data-sort-key="dueDate" class="sortable">TANGGAL</th>
-              <th id="sort-status" data-sort-key="completed" class="sortable">STATUS</th>
-              <th>TINDAKAN</th>
-            </tr>
-          </thead>
-          <tbody id="task-list">
-            <tr><td colspan="4" class="no-task-message">No task found</td></tr>
-          </tbody>
-        </table>
-      </section>
-      </section>
-  </main>
-  <div id="delete-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="delete-modal-title">
-    <div class="modal-content">
-      <h2 id="delete-modal-title">Hapus Semua Tugas?</h2>
-      <p>Apakah Anda yakin ingin menghapus SEMUA tugas dari daftar? Aksi ini tidak dapat dibatalkan.</p>
-      <div class="modal-actions">
-        <button id="cancel-delete-btn" class="control-btn filter-btn">Batal</button>
-        <button id="confirm-delete-btn" class="control-btn delete-all-btn">Ya, Hapus Semua</button>
-      </div>
+            <section class="task-table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th id="sort-task" data-sort-key="name" class="sortable">TUGAS</th>
+                            <th id="sort-date" data-sort-key="dueDate" class="sortable">TANGGAL</th>
+                            <th id="sort-status" data-sort-key="completed" class="sortable">STATUS</th>
+                            <th>TINDAKAN</th>
+                        </tr>
+                    </thead>
+                    <tbody id="task-list">
+                        <tr><td colspan="4" class="no-task-message">No task found</td></tr>
+                    </tbody>
+                </table>
+            </section>
+        </section>
+    </main>
+    <div id="delete-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="delete-modal-title">
+        <div class="modal-content">
+            <h2 id="delete-modal-title">Hapus Semua Tugas?</h2>
+            <p>Apakah Anda yakin ingin menghapus SEMUA tugas dari daftar? Aksi ini tidak dapat dibatalkan.</p>
+            <div class="modal-actions">
+                <button id="cancel-delete-btn" class="control-btn filter-btn">Batal</button>
+                <button id="confirm-delete-btn" class="control-btn delete-all-btn">Ya, Hapus Semua</button>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <div id="edit-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="edit-modal-title">
-    <div class="modal-content">
-      <h2 id="edit-modal-title">Edit Tugas</h2>
-      <input type="text" id="edit-task-input" placeholder="Nama Tugas">
-      <input type="date" id="edit-due-date-input">
-      <div class="modal-actions">
-        <button id="cancel-edit-btn" class="control-btn filter-btn">Batal</button>
-        <button id="save-edit-btn" class="control-btn add-btn">Simpan Perubahan</button>
-      </div>
+    <div id="edit-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="edit-modal-title">
+        <div class="modal-content">
+            <h2 id="edit-modal-title">Edit Tugas</h2>
+            <input type="text" id="edit-task-input" placeholder="Nama Tugas">
+            <input type="date" id="edit-due-date-input">
+            <div class="modal-actions">
+                <button id="cancel-edit-btn" class="control-btn filter-btn">Batal</button>
+                <button id="save-edit-btn" class="control-btn add-btn">Simpan Perubahan</button>
+            </div>
+        </div>
     </div>
-  </div>
-  <footer class="app-footer">
-    <p>© 2025 Todo List Website - Alvin Zulian Putra</p>
-  </footer>
+    <footer class="app-footer">
+        <p>© 2025 Todo List Website - Alvin Zulian Putra</p>
+    </footer>
 
-  <div class="toast-notification"></div>
+    <div class="toast-notification"></div>
 
-  <script src="js/script.js"></script> 
+    <script src="js/script.js"></script> 
 </body>
 </html>

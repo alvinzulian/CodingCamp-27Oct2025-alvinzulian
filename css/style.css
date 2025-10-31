@@ -40,13 +40,28 @@ body {
     box-shadow: 0 18px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 204, 179, 0.6);
 }
 
+/* --- Gaya Baru untuk Logo yang Ditumpuk --- */
+.website-logo-stacked {
+    height: 60px; 
+    width: auto;
+    margin-bottom: 10px; /* Jarak antara logo dan teks */
+    filter: drop-shadow(0 0 10px rgba(0, 204, 179, 0.7)); 
+}
+
 h1 {
+    display: flex; 
+    flex-direction: column; /* Susun item secara vertikal */
+    align-items: center; /* Pusatkan item secara horizontal */
+    justify-content: center; 
+    
+    /* Properti h1 yang sudah ada */
     text-align: center;
     color: var(--text-color);
     margin-bottom: 25px;
     font-weight: 700;
     letter-spacing: 1.5px;
-    text-shadow: 0 0 5px var(--gold-glow), 0 0 10px rgba(0, 204, 179, 0.5);
+    font-size: 2.5em; /* Ukuran font yang lebih besar */
+    text-shadow: 0 0 8px var(--gold-glow), 0 0 15px rgba(0, 204, 179, 0.7); 
 }
 
 /* --- Input dan Tombol Tambah --- */
